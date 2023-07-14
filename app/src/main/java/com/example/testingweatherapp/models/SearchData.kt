@@ -1,8 +1,12 @@
 package com.example.testingweatherapp.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 class SearchData {
-    class location_data(
-        val id: String,
+    @Serializable
+    class location(
+        val id: Int,
         val name: String,
         val region: String,
         val country: String,
@@ -10,7 +14,9 @@ class SearchData {
         val lon: Double,
         val url: String
     )
-    data class location(
-        val location: List<location_data>
+
+    @Serializable
+    data class location_data(
+        val location: List<location>
     )
 }

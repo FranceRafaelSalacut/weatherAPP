@@ -8,8 +8,10 @@ import java.io.IOException
 import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.constants.Constants
 import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.serialization.json.decodeToSequence
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import org.json.JSONArray
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -53,24 +55,30 @@ class Model :  Contract.Model{
             }
             "search" -> {
                 Log.d("this", type)
+
                 val result = ApiServices.search_location(
                     apiKey = Constants.apiKey,
                     location = data[0].toString(),
                 )
 
-                result.enqueue(object: Callback<SearchData.location>{
-                    override fun onResponse(call: Call<SearchData.location>, response: Response<SearchData.location>) {
+                Log.d("this", result.request().url.toString())
+
+                Log.d("this", "inside frerere ${data[0].toString()}")
+
+                result.enqueue(object: Callback<List<SearchData.location>>{
+                    override fun onResponse(call: Call<List<SearchData.location>>, response: Response<List<SearchData.location>>) {
                         if(response.isSuccessful){
-                            /*listener.onFinished(response.body())*/
                             Log.d("this", response.body().toString())
+                            var temp: List<SearchData.location>? = response.body()
+                            listener.onFinished(temp)
                         }else{
                             Log.d("this", "AINT ASUCCSFSDFSEFA")
-                            /*listener.onFinished(null)*/
+                            listener.onFinished(null)
                         }
                     }
-                    override fun onFailure(call: Call<SearchData.location>, t: Throwable) {
-                        Log.d("this", "FAILURE!! ")
-                        /*listener.onFinished(null)*/
+                    override fun onFailure(call: Call<List<SearchData.location>>, t: Throwable) {
+                        Log.d("this", "FAILURE!! $t ")
+                        listener.onFinished(null)
                     }
                 })
             }

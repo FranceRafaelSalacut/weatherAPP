@@ -19,7 +19,7 @@ interface ApiServices {
     fun search_location(
         @Query("key") apiKey: String,
         @Query("q") location: String
-    ): Call<SearchData.location>
+    ): Call<List<SearchData.location>>
 
     @GET("")
     fun dummy(): Call<Any>

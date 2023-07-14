@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
 import com.example.testingweatherapp.models.ForecastData
+import com.example.testingweatherapp.models.SearchData
 
 
 class presenter (private var mainView: Contract.View, private var model: Contract.Model) : Contract.Presenter, Contract.Model.onfinishedListener {
@@ -40,6 +41,9 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
                     weather_Data?.current?.condition?.icon?:""
                 )
             }
+            is List<*> ->{
+                Log.d("this","im here")
+            }
             else -> {
                 display = null
             }
@@ -48,7 +52,7 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
 
 
 
-        mainView.display(display)
+        /*mainView.display(display)*/
     }
 
 
