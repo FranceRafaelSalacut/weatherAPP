@@ -19,13 +19,13 @@ class MainActivity: AppCompatActivity() {
         val button2 = findViewById<Button>(R.id.button2)
 
         button.setOnClickListener(View.OnClickListener {
-            Log.d("this", "WEATHER FORCAST")
+            Log.d("this", "WEATHER FORCAST ON GITHUBB")
             val intent = Intent(this, Forecast::class.java)
             startActivity(intent)
         })
 
         button2.setOnClickListener(View.OnClickListener {
-            Log.d("this", "SEARCH YOUR GODAMN NEIGHBOURS")
+            Log.d("this", "SEARCH YOUR GODAMN NEIGHBOURS ON GITHUBBB")
             val intent = Intent(this, Searchbars::class.java)
             startActivity(intent)
         })

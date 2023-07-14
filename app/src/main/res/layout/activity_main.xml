@@ -9,7 +9,7 @@
         android:id="@+id/label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WHERE DO YOU WANT TO GO?"
+        android:text="IVE COMMITED THIS ON GITHUBBB"
         android:layout_marginTop="100dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

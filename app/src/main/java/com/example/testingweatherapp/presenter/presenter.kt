@@ -8,17 +8,6 @@ import com.example.testingweatherapp.models.ForecastData
 
 class presenter (private var mainView: Contract.View, private var model: Contract.Model) : Contract.Presenter, Contract.Model.onfinishedListener {
 
-    /*override  fun onButtonClick() {
-        Log.d("this", "You clicked me? ")
-        val URL = mainView.constructURL()
-        if(model.__init__data(URL)){
-            mainView.display("API CALL SUCESS")
-        }else{
-            mainView.display("API CALL BAD")
-        }
-
-    }*/
-
     override fun onButtonClickForecast() {
         Log.d("this", "Tempooooooooooooooorary")
         val data:List<Any> = mainView.getdata()
