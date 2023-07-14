@@ -10,25 +10,46 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
 
     override fun onButtonClickForecast() {
         Log.d("this", "Tempooooooooooooooorary")
-        val data:List<Any> = mainView.getdata()
-        model.__init__data(data[0].toString(), Integer.parseInt(data[1].toString()), this)
+        model.__init__data(
+            "forecast",
+            mainView.getdata(),
+            this
+        )
 
     }
 
     override fun onButtonClikcSearch() {
-        val data:List<Any> = mainView.getdata()
-    }
-
-    override fun onFinished(weather_Data: ForecastData.forecastData?) {
-        Log.d("this", "inside but on clck $weather_Data.toString()")
-        Log.d("this", weather_Data?.current?.condition?.icon?:"No data")
-
-        mainView.display(
-            weather_Data?.location?.name?:"No data",
-            weather_Data?.location?.country?:"No data",
-            weather_Data?.current?.condition?.text?:"No data",
-            weather_Data?.current?.condition?.icon?:R.drawable.image_temp
+        model.__init__data(
+            "search",
+            mainView.getdata(),
+            this
         )
     }
+
+    override fun onFinished(data: Any?) {
+        val display: List<Any>?
+
+        when (data){
+            is ForecastData.forecastData -> {
+                var weather_Data: ForecastData.forecastData? = data
+
+                display = listOf(
+                    weather_Data?.location?.name?:"No data",
+                    weather_Data?.location?.country?:"No data",
+                    weather_Data?.current?.condition?.text?:"No data",
+                    weather_Data?.current?.condition?.icon?:""
+                )
+            }
+            else -> {
+                display = null
+            }
+        }
+
+
+
+
+        mainView.display(display)
+    }
+
 
 }

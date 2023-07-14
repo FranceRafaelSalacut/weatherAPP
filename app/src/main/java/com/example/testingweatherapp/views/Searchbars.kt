@@ -25,16 +25,13 @@ class Searchbars: AppCompatActivity(), Contract.View{
         location_result.layoutManager = LinearLayoutManager(this)
     }
 
+
+
     override fun getdata(): List<Any> {
         TODO("Not yet implemented")
     }
 
-    override fun display(
-        location_name: String,
-        location_region: String,
-        forecast: String,
-        icon_url: Any
-    ) {
+    override fun display(display: List<Any>?) {
         TODO("Not yet implemented")
     }
 }

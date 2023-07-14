@@ -16,16 +16,23 @@ import retrofit2.Response
 
 class Model :  Contract.Model{
 
-    override fun __init__data(location: String, days: Int, listener: Contract.Model.onfinishedListener){
+    override fun __init__data(type: String, data: List<Any>, listener: Contract.Model.onfinishedListener){
         Log.d("this", "We are inside the INIT DATA you sonavabetch")
 
-        var forecastData: ForecastData.forecastData?= null
-        val forecastdataApi = RetrofitHelper.getInstance().create(ApiServices::class.java)
+        when (type){
+            "forecast" -> Log.d("this", type)
+            "search" -> Log.d("this", type)
+            else -> TODO("Nothing to do")
+        }
 
-        val result = forecastdataApi.getForecastData(
+
+        var forecastData: ForecastData.forecastData?= null
+        val ApiServices = RetrofitHelper.getInstance().create(ApiServices::class.java)
+
+        val result = ApiServices.getForecastData(
             apiKey = Constants.apiKey,
-            location = location,
-            days = days,
+            location = data[0].toString(),
+            days = Integer.parseInt(data[1].toString()),
             aqi = Constants.aqi,
             alerts = Constants.alerts
         )
@@ -33,8 +40,8 @@ class Model :  Contract.Model{
         result.enqueue(object: Callback<ForecastData.forecastData>{
             override fun onResponse(call: Call<ForecastData.forecastData>, response: Response<ForecastData.forecastData>) {
                 if(response.isSuccessful){
-                    forecastData = response.body()
-                    listener.onFinished(forecastData)
+                    /*forecastData = response.body()*/
+                    listener.onFinished(response.body())
                 }else{
                     Log.d("this", "AINT ASUCCSFSDFSEFA")
                     listener.onFinished(null)

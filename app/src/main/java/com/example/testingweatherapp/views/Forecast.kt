@@ -3,6 +3,7 @@ package com.example.testingweatherapp.views
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Display
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.Button
@@ -26,7 +27,6 @@ class Forecast : AppCompatActivity(), Contract.View{
     private var progressbar: ProgressBar? = null
     private var forecast_icon: ImageView?  = null
     private var back: Button? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +64,28 @@ class Forecast : AppCompatActivity(), Contract.View{
         return listOf(location, days)
     }
 
-    override fun display(location_name: String, location_region: String, forecast: String, icon_url: Any) {
+    override fun display(display: List<Any>?) {
 
-        dips!!.text = "$forecast\n$location_name, $location_region"
+        val to_display:String
+        val icon_url:Any
 
+        when (display){
+            null -> {
+                to_display = "No Data\nNo Data, No Data"
+                icon_url = R.drawable.image_temp
+            }
+            else -> {
+                to_display = "${display[2]}\n${display[0]},${display[1]}"
+                icon_url = "https:${display[3]}"
+            }
+        }
 
-        forecast_icon!!.load("https:$icon_url"){
+        dips!!.text = to_display
+
+        forecast_icon!!.load(
+            /*if (icon_url == "") R.drawable.image_temp else icon_url*/
+            icon_url
+        ){
             crossfade(true)
             placeholder(R.drawable.image_temp)
             transformations(CircleCropTransformation())

@@ -133,4 +133,23 @@ class dump {
         })
     }*/
 
+    /*val display: List<Any> = listOf(
+            weather_Data?.location?.name?:"No data",
+            weather_Data?.location?.country?:"No data",
+            weather_Data?.current?.condition?.text?:"No data",
+            weather_Data?.current?.condition?.icon?:""
+        )*/
+
+    /*override fun onFinished(weather_Data: ForecastData.forecastData?) {
+        val display: List<Any> = listOf(
+            weather_Data?.location?.name?:"No data",
+            weather_Data?.location?.country?:"No data",
+            weather_Data?.current?.condition?.text?:"No data",
+            weather_Data?.current?.condition?.icon?:""
+        )
+
+        mainView.display(display)
+    }*/
+
+
 }
