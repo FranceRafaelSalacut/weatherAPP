@@ -18,7 +18,7 @@ interface Contract {
             fun onFinished(data: Any?)
         }
 
-        fun __init__data(tyep: String, data: List<Any>, Listener: onfinishedListener)
+        fun __init__data(type: String, data: List<Any>, listener: onfinishedListener)
         /*fun __init__data(*//*URL:String*//*location: String, day: Int, listener: onfinishedListener)*/
         /*fun __init__data(URL:String): Boolean*/
     }
