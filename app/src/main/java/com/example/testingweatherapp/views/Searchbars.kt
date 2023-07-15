@@ -74,6 +74,7 @@ class Searchbars: AppCompatActivity(), Contract.View{
                     showData()
                 }else{
                     showNoData()
+                    //asdhasdjahsidhasd
                 }
             }
         }
