@@ -66,14 +66,15 @@ class Searchbars: AppCompatActivity(), Contract.View{
                 showNoData()
             }
             else -> {
-                val display = display as MutableList<List<String>>
+                val display = display as List<String>
                 if(display.size > 0){
-                    val adapter = CustomAdapter(display)
+                    val adapter = CustomAdapter(display, Model())
                     location_result!!.swapAdapter(adapter, false)
                     location_result!!.layoutManager = LinearLayoutManager(this)
                     showData()
                 }else{
                     showNoData()
+                    //asdhasdjahsidhasd
                 }
             }
         }
