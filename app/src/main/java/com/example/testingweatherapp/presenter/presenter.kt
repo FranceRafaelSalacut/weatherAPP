@@ -52,7 +52,12 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
             }
             is List<*> ->{
                 Log.d("this", "im here after everything")
-                display = data as MutableList<List<String>>
+                val search_data = data as List<SearchData.location>
+                display = mutableListOf()
+
+                for(location in search_data){
+                    display.add("${location.name}, ${location.region}, ${location.country} ")
+                }
 
             }
             else -> {

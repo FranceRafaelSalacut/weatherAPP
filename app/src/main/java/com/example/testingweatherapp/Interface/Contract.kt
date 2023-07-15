@@ -1,5 +1,7 @@
 package com.example.testingweatherapp.Interface
 
+import android.media.Image
+import android.widget.ImageView
 import com.example.testingweatherapp.models.ForecastData
 import com.example.testingweatherapp.models.SearchData
 
@@ -31,6 +33,11 @@ interface Contract {
             location_data: MutableList<List<String>>,
             listener: Contract.Model.onfinishedListener
         ) {TODO("NOTHING")}
+
+        fun getIconNEW(
+            Location: String,
+            instance: ImageView
+        ){TODO("NOTHING")}
 
     }
 

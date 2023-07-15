@@ -14,7 +14,7 @@ import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
 
 
-class CustomAdapter(private val dataSet: MutableList<List<String>>) :
+class CustomAdapter(private val dataSet: List<String>, private var model: Contract.Model) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
@@ -45,13 +45,8 @@ class CustomAdapter(private val dataSet: MutableList<List<String>>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position][0]
-        viewHolder.forecast.load("https:${dataSet[position][1]}"){
-            crossfade(true)
-            error(R.drawable.sunny_icon)
-            placeholder(R.drawable.image_temp)
-            transformations(CircleCropTransformation())
-        }
+        viewHolder.textView.text = dataSet[position]
+        model.getIconNEW(dataSet[position], viewHolder.forecast)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
