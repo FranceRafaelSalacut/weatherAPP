@@ -32,6 +32,10 @@
             android:name=".views.Searchbars"
             android:exported="true"
             />
+        <activity
+            android:name=".views.dummclass"
+            android:exported="true"
+            />
     </application>
 
 </manifest>

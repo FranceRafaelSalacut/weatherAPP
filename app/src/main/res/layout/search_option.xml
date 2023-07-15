@@ -42,20 +42,22 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/location_text_container"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/location_icon"
+            app:layout_constraintEnd_toStartOf="@id/location_forecast_container"
             >
 
             <TextView
                 android:id="@+id/location_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="temporary text"
                 android:textSize="16dp"
+                android:textAlignment="viewStart"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -18,6 +18,7 @@ import com.example.testingweatherapp.R
 import com.example.testingweatherapp.models.Model
 import com.example.testingweatherapp.presenter.CustomAdapter
 import com.example.testingweatherapp.presenter.presenter
+import java.util.Objects
 
 class Searchbars: AppCompatActivity(), Contract.View{
 
@@ -68,9 +69,17 @@ class Searchbars: AppCompatActivity(), Contract.View{
             else -> {
                 val display = display as List<String>
                 if(display.size > 0){
-                    val adapter = CustomAdapter(display, Model())
+                    val adapter = CustomAdapter(display,  Model())
                     location_result!!.swapAdapter(adapter, false)
                     location_result!!.layoutManager = LinearLayoutManager(this)
+
+                    adapter.setOnClickListener(object : CustomAdapter.OnClickListener{
+                        override fun onClick(location: String) {
+                            val intent = Intent(this@Searchbars, dummclass::class.java)
+                            startActivity(intent)
+                        }
+                    })
+
                     showData()
                 }else{
                     showNoData()
