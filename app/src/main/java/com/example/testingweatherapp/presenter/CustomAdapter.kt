@@ -1,14 +1,20 @@
-package com.example.testingweatherapp.views
+package com.example.testingweatherapp.presenter
 
+import android.util.Log
+import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
 
 
-class CustomAdapter(private val dataSet: Array<String>) :
+class CustomAdapter(private val dataSet: MutableList<List<String>>) :
     RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     /**
@@ -17,10 +23,11 @@ class CustomAdapter(private val dataSet: Array<String>) :
      */
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView
-
+        val forecast: ImageView
         init {
             // Define click listener for the ViewHolder's View
             textView = view.findViewById(R.id.location_text)
+            forecast = view.findViewById(R.id.location_forecast)
         }
     }
 
@@ -38,10 +45,17 @@ class CustomAdapter(private val dataSet: Array<String>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+        viewHolder.textView.text = dataSet[position][0]
+        viewHolder.forecast.load("https:${dataSet[position][1]}"){
+            crossfade(true)
+            error(R.drawable.sunny_icon)
+            placeholder(R.drawable.image_temp)
+            transformations(CircleCropTransformation())
+        }
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
+
 
 }

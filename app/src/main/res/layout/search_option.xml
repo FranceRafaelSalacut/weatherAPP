@@ -64,7 +64,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/location_forecast"
+            android:id="@+id/location_forecast_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
@@ -74,6 +74,7 @@
             >
 
             <ImageView
+                android:id="@+id/location_forecast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sunny_icon"

@@ -45,7 +45,7 @@ class Forecast : AppCompatActivity(), Contract.View{
 
         //Assigning listeners to buttons
         this.button!!.setOnClickListener(View.OnClickListener {
-            presenter!!.onButtonClickForecast()
+            presenter!!.onButtonClick("forecast")
         })
 
         this.back!!.setOnClickListener(View.OnClickListener {
@@ -67,12 +67,12 @@ class Forecast : AppCompatActivity(), Contract.View{
     override fun display(display: List<Any>?) {
 
         val to_display:String
-        val icon_url:Any
+        val icon_url:String
 
         when (display){
             null -> {
                 to_display = "No Data\nNo Data, No Data"
-                icon_url = R.drawable.image_temp
+                icon_url = ""
             }
             else -> {
                 to_display = "${display[2]}\n${display[0]},${display[1]}"
@@ -82,11 +82,9 @@ class Forecast : AppCompatActivity(), Contract.View{
 
         dips!!.text = to_display
 
-        forecast_icon!!.load(
-            /*if (icon_url == "") R.drawable.image_temp else icon_url*/
-            icon_url
-        ){
+        forecast_icon!!.load(icon_url){
             crossfade(true)
+            error(R.drawable.sunny_icon)
             placeholder(R.drawable.image_temp)
             transformations(CircleCropTransformation())
         }

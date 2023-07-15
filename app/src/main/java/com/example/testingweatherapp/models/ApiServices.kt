@@ -21,6 +21,13 @@ interface ApiServices {
         @Query("q") location: String
     ): Call<List<SearchData.location>>
 
+    @GET("current.json")
+    fun getCurrent(
+        @Query("key") apiKey: String,
+        @Query("q") location: String,
+        @Query("aqi") aqi: String
+    ): Call<Current.forecastData>
+
     @GET("")
     fun dummy(): Call<Any>
 }

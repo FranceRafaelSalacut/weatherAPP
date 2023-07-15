@@ -151,5 +151,22 @@ class dump {
         mainView.display(display)
     }*/
 
+   /* val locations = arrayOf("Cebu", "Bohol", "Dumagetme", "Argao", "DD")
+
+    val adapter = CustomAdapter(locations)
+
+    location_result.adapter = adapter
+
+    location_result.layoutManager = LinearLayoutManager(this)
+
+    val sec = arrayOf("Dionn", "Panpan", "Mingky", "Caturay", "Josephine")
+
+    val nadapter = CustomAdapter(sec)
+
+    location_result.swapAdapter(nadapter, false)
+
+    location_result.layoutManager = LinearLayoutManager(this)*/
+
+
 
 }

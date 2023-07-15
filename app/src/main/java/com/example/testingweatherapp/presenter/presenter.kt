@@ -5,6 +5,7 @@ import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
 import com.example.testingweatherapp.models.ForecastData
 import com.example.testingweatherapp.models.SearchData
+import kotlin.math.log
 
 
 class presenter (private var mainView: Contract.View, private var model: Contract.Model) : Contract.Presenter, Contract.Model.onfinishedListener {
@@ -27,6 +28,14 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
         )
     }
 
+    override fun onButtonClick(from: String) {
+        Log.d("one", "We are one now!!")
+        model.__init__data(
+            from,
+            mainView.getdata(),
+            this
+        )
+    }
     override fun onFinished(data: Any?) {
         val display: List<Any>?
 
@@ -42,17 +51,17 @@ class presenter (private var mainView: Contract.View, private var model: Contrac
                 )
             }
             is List<*> ->{
-                Log.d("this","im here")
+                Log.d("this", "im here after everything")
+                display = data as MutableList<List<String>>
+
             }
             else -> {
+                Log.d("this", "null me bitch")
                 display = null
             }
         }
 
-
-
-
-        /*mainView.display(display)*/
+        mainView.display(display)
     }
 
 
