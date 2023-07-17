@@ -76,6 +76,7 @@ class Searchbars: AppCompatActivity(), Contract.View{
                     adapter.setOnClickListener(object : CustomAdapter.OnClickListener{
                         override fun onClick(location: String) {
                             val intent = Intent(this@Searchbars, dummclass::class.java)
+                            intent.putExtra("Location", location)
                             startActivity(intent)
                         }
                     })
