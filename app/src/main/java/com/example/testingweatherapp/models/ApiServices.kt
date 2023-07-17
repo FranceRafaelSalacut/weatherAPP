@@ -1,5 +1,8 @@
 package com.example.testingweatherapp.models
 
+import com.example.testingweatherapp.models.pojo.Current
+import com.example.testingweatherapp.models.pojo.ForecastData
+import com.example.testingweatherapp.models.pojo.SearchData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

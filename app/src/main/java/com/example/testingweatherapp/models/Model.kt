@@ -7,23 +7,12 @@ import coil.transform.CircleCropTransformation
 import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
 import com.example.testingweatherapp.constants.Constants
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.serialization.json.decodeToSequence
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import org.json.JSONArray
+import com.example.testingweatherapp.models.pojo.Current
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.FieldPosition
-import java.util.concurrent.CountDownLatch
-import kotlin.reflect.KClass
 
 class Model :  Contract.Model{
-
-    private val ApiServices = RetrofitHelper.getInstance().create(ApiServices::class.java)
-
-
     fun setIcon(data: Current.forecastData?, instance: ImageView?){
         val icon_url:String
 
@@ -68,6 +57,9 @@ class Model :  Contract.Model{
     }
 
     override fun getData(type: String, data: List<Any>, listener: Contract.Model.onfinishedListener?, instance: ImageView?) {
+
+        val ApiServices = RetrofitHelper.getInstance().create(ApiServices::class.java)
+
         when (type) {
             "forecast" -> {
                 Log.d("this", "NEW $type")

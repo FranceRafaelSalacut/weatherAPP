@@ -46,7 +46,7 @@ class Forecast : AppCompatActivity(), Contract.View{
 
         //Assigning listeners to buttons
         this.button!!.setOnClickListener(View.OnClickListener {
-            presenter!!.onButtonClick("forecast")
+            presenter!!.onButtonClick(from = "forecast")
         })
 
         this.back!!.setOnClickListener(View.OnClickListener {
