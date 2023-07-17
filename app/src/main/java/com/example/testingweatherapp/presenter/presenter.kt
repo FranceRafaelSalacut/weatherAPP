@@ -10,30 +10,24 @@ import kotlin.math.log
 
 class presenter (private var mainView: Contract.View, private var model: Contract.Model) : Contract.Presenter, Contract.Model.onfinishedListener {
 
-    override fun onButtonClickForecast() {
-        Log.d("this", "Tempooooooooooooooorary")
-        model.__init__data(
-            "forecast",
-            mainView.getdata(),
-            this
-        )
 
-    }
 
-    override fun onButtonClikcSearch() {
-        model.__init__data(
-            "search",
-            mainView.getdata(),
-            this
-        )
-    }
-
-    override fun onButtonClick(from: String) {
+    /*override fun onButtonClick(from: String) {
         Log.d("one", "We are one now!!")
         model.__init__data(
             from,
             mainView.getdata(),
             this
+        )
+    }*/
+
+    override fun onButtonClick(from: String) {
+        Log.d("this", "The new era has begun")
+        model.getData(
+            from,
+            mainView.getdata(),
+            this,
+            null
         )
     }
     override fun onFinished(data: Any?) {

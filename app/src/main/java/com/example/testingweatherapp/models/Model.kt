@@ -23,13 +23,54 @@ class Model :  Contract.Model{
 
     private val ApiServices = RetrofitHelper.getInstance().create(ApiServices::class.java)
 
-    override fun __init__data(type: String, data: List<Any>, listener: Contract.Model.onfinishedListener) {
-        Log.d("this", "We are inside the INIT DATA you sonavabetch")
 
+    fun setIcon(data: Current.forecastData?, instance: ImageView?){
+        val icon_url:String
 
+        Log.d("this", "We here?")
+
+        when(data){
+            null -> icon_url=""
+            else -> icon_url = "https:" + data.current.condition.icon
+        }
+        instance?.load(icon_url){
+            crossfade(true)
+            error(R.drawable.sunny_icon)
+            placeholder(R.drawable.image_temp)
+            transformations(CircleCropTransformation())
+        }
+    }
+    fun <T> trying_to(result: Call<T>, listener: Contract.Model.onfinishedListener?, instance: ImageView?): Unit{
+
+        Log.d("this", "NEW API CALL")
+        Log.d("this", "We here? ${instance.toString()}")
+
+        result.enqueue(object : Callback<T> {
+            override fun onResponse(call: Call<T>, response: Response<T>
+            ) {
+                if (response.isSuccessful) {
+                    listener?.onFinished(response.body())
+                    if(instance!=null) setIcon(response.body() as Current.forecastData?, instance)
+
+                } else {
+                    Log.d("this", "AINT ASUCCSFSDFSEFA")
+                    listener?.onFinished(null)
+                    setIcon(null, instance)
+                }
+            }
+
+            override fun onFailure(call: Call<T>, t: Throwable) {
+                Log.d("this", "FAILURE!! ")
+                listener?.onFinished(null)
+                setIcon(null, instance)
+            }
+        })
+    }
+
+    override fun getData(type: String, data: List<Any>, listener: Contract.Model.onfinishedListener?, instance: ImageView?) {
         when (type) {
             "forecast" -> {
-                Log.d("this", type)
+                Log.d("this", "NEW $type")
                 val result = ApiServices.getForecastData(
                     apiKey = Constants.apiKey,
                     location = data[0].toString(),
@@ -37,108 +78,34 @@ class Model :  Contract.Model{
                     aqi = Constants.aqi,
                     alerts = Constants.alerts
                 )
+                trying_to(result, listener, instance)
 
-                Log.d("this", "inside frerere ${data[0].toString()}")
-
-
-                result.enqueue(object : Callback<ForecastData.forecastData> {
-                    override fun onResponse(
-                        call: Call<ForecastData.forecastData>,
-                        response: Response<ForecastData.forecastData>
-                    ) {
-                        if (response.isSuccessful) {
-                            listener.onFinished(response.body())
-                        } else {
-                            Log.d("this", "AINT ASUCCSFSDFSEFA")
-                            listener.onFinished(null)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<ForecastData.forecastData>, t: Throwable) {
-                        Log.d("this", "FAILURE!! ")
-                        listener.onFinished(null)
-                    }
-                })
             }
 
             "search" -> {
-                Log.d("this", type)
-
+                Log.d("this", "NEW $type")
                 val result = ApiServices.search_location(
                     apiKey = Constants.apiKey,
                     location = data[0].toString(),
                 )
+                trying_to(result, listener, instance)
+            }
 
-                Log.d("this", result.request().url.toString())
-
-                Log.d("this", "inside frerere ${data[0].toString()}")
-
-                result.enqueue(object : Callback<List<SearchData.location>> {
-                    override fun onResponse(
-                        call: Call<List<SearchData.location>>,
-                        response: Response<List<SearchData.location>>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.d("this", response.body().toString())
-                            listener.onFinished(response.body())
-
-                        } else {
-                            Log.d("this", "AINT ASUCCSFSDFSEFA")
-                            listener.onFinished(null)
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<SearchData.location>>, t: Throwable) {
-                        Log.d("this", "FAILURE!! $t ")
-                        listener.onFinished(null)
-                    }
-                })
+            "icon" -> {
+                Log.d("this", "NEW $type")
+                val result = ApiServices.getCurrent(
+                    apiKey =  Constants.apiKey,
+                    location = data[0].toString(),
+                    aqi = Constants.aqi
+                )
+                trying_to(result, listener, instance)
             }
 
             else -> {
-                listener.onFinished(null)
+                listener?.onFinished(null)
             }
         }
-
     }
 
-    override fun getIconNEW(Location: String, instance: ImageView) {
-
-        var icon_url: String = ""
-
-        val result = ApiServices.getCurrent(
-            apiKey =  Constants.apiKey,
-            location = Location,
-            aqi = Constants.aqi
-        )
-
-        result.enqueue(object : Callback<Current.forecastData> {
-            override fun onResponse(call: Call<Current.forecastData>, response: Response<Current.forecastData>) {
-                if (response.isSuccessful) {
-                    Log.d("this", response.body().toString())
-                    icon_url = "https:" + response.body()?.current?.condition?.icon
-                    setIcon(icon_url, instance)
-
-                } else {
-                    Log.d("this", "AINT ASUCCSFSDFSEFA")
-                    setIcon(icon_url, instance)
-                }
-            }
-
-            override fun onFailure(call: Call<Current.forecastData>, t: Throwable) {
-                Log.d("this", "FAILURE!! $t ")
-                setIcon(icon_url, instance)
-            }
-        })
-    }
-
-    fun setIcon(icon_url: String, instance: ImageView){
-        instance.load(icon_url){
-            crossfade(true)
-            error(R.drawable.sunny_icon)
-            placeholder(R.drawable.image_temp)
-            transformations(CircleCropTransformation())
-        }
-    }
 
 }

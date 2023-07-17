@@ -3,6 +3,7 @@ package com.example.testingweatherapp.views
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Display
 import android.view.View
 import android.widget.AutoCompleteTextView
@@ -60,6 +61,8 @@ class Forecast : AppCompatActivity(), Contract.View{
         dips!!.visibility = View.INVISIBLE
 
         val location = location!!.text.toString()
+        val test = location!!::toString
+        Log.d("test", test.toString())
         val days = 1
         return listOf(location, days)
     }

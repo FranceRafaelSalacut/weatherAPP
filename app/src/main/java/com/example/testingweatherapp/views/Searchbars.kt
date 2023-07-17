@@ -3,7 +3,6 @@ package com.example.testingweatherapp.views
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Display.Mode
 import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
@@ -18,7 +17,6 @@ import com.example.testingweatherapp.R
 import com.example.testingweatherapp.models.Model
 import com.example.testingweatherapp.presenter.CustomAdapter
 import com.example.testingweatherapp.presenter.presenter
-import java.util.Objects
 
 class Searchbars: AppCompatActivity(), Contract.View{
 

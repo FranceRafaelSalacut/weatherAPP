@@ -27,17 +27,19 @@ interface Contract {
         /*fun __init__data(*//*URL:String*//*location: String, day: Int, listener: onfinishedListener)*/
         /*fun __init__data(URL:String): Boolean*/
 
-        fun getIcon(
+        /*fun getIcon(
             listofLocation: List<SearchData.location>,
             position: Int,
             location_data: MutableList<List<String>>,
             listener: Contract.Model.onfinishedListener
-        ) {TODO("NOTHING")}
+        ) {TODO("NOTHING")}*/
 
-        fun getIconNEW(
+       /* fun getIconNEW(
             Location: String,
             instance: ImageView
-        ){TODO("NOTHING")}
+        ){TODO("NOTHING")}*/
+
+        fun getData(type: String, data: List<Any>, listener: onfinishedListener?, instance : ImageView?){TODO("NOTHING")}
 
     }
 
@@ -46,6 +48,7 @@ interface Contract {
         fun onButtonClikcSearch(){TODO("NOTHING")}
         fun onButtonClick(from:String){TODO("NOTHING")}
 
+        fun onFinished(data: Any?){TODO("NOTHING")}
     }
 
 }

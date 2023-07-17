@@ -1,20 +1,14 @@
 package com.example.testingweatherapp.presenter
 
-import android.app.SearchManager.OnCancelListener
-import android.content.Intent
 import android.util.Log
-import android.view.Display.Mode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.example.testingweatherapp.Interface.Contract
 import com.example.testingweatherapp.R
-import com.example.testingweatherapp.views.dummclass
 
 
 class CustomAdapter(private val dataSet: List<String>, private var model: Contract.Model) :
@@ -50,7 +44,9 @@ class CustomAdapter(private val dataSet: List<String>, private var model: Contra
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.textView.text = dataSet[position]
-        model.getIconNEW(dataSet[position], viewHolder.forecast)
+        /*model.getIconNEW(dataSet[position], viewHolder.forecast)*/
+        Log.d("this", "We here? in the adaptor?")
+        model.getData("icon", listOf(dataSet[position]), null, viewHolder.forecast)
 
         viewHolder.itemView.setOnClickListener {
             if (onClickListener != null) {
