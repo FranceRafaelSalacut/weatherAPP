@@ -42,7 +42,7 @@ class dummclass : AppCompatActivity(), Contract.View {
         button = findViewById<Button>(R.id.buttonn)
         presenter = presenter(this, Model())
 
-        presenter!!.onButtonClick(from ="forecast")
+        presenter!!.onButtonClick("forecast")
 
         this.back!!.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, Searchbars::class.java )

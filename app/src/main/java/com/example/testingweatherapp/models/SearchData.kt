@@ -1,4 +1,4 @@
-package com.example.testingweatherapp.models.pojo
+package com.example.testingweatherapp.models
 
 import kotlinx.serialization.Serializable
 
