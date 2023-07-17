@@ -2,32 +2,19 @@ package com.example.testingweatherapp.presenter
 
 import android.util.Log
 import com.example.testingweatherapp.Interface.Contract
-import com.example.testingweatherapp.R
-import com.example.testingweatherapp.models.ForecastData
-import com.example.testingweatherapp.models.SearchData
-import kotlin.math.log
+import com.example.testingweatherapp.models.pojo.ForecastData
+import com.example.testingweatherapp.models.pojo.SearchData
 
 
 class presenter (private var mainView: Contract.View, private var model: Contract.Model) : Contract.Presenter, Contract.Model.onfinishedListener {
 
-
-
-    /*override fun onButtonClick(from: String) {
-        Log.d("one", "We are one now!!")
-        model.__init__data(
-            from,
-            mainView.getdata(),
-            this
-        )
-    }*/
-
     override fun onButtonClick(from: String) {
         Log.d("this", "The new era has begun")
         model.getData(
-            from,
-            mainView.getdata(),
-            this,
-            null
+            type = from,
+            data = mainView.getdata(),
+            listener = this,
+            instance = null
         )
     }
     override fun onFinished(data: Any?) {

@@ -46,7 +46,13 @@ class CustomAdapter(private val dataSet: List<String>, private var model: Contra
         viewHolder.textView.text = dataSet[position]
         /*model.getIconNEW(dataSet[position], viewHolder.forecast)*/
         Log.d("this", "We here? in the adaptor?")
-        model.getData("icon", listOf(dataSet[position]), null, viewHolder.forecast)
+
+        model.getData(
+            type = "icon",
+            data = listOf(dataSet[position]),
+            listener = null,
+            instance = viewHolder.forecast
+        )
 
         viewHolder.itemView.setOnClickListener {
             if (onClickListener != null) {

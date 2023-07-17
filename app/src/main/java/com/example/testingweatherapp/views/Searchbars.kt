@@ -42,7 +42,7 @@ class Searchbars: AppCompatActivity(), Contract.View{
 
         this.SearchButton!!.setOnClickListener(View.OnClickListener {
             Log.d("this", "looking for some places?")
-            presenter!!.onButtonClick("search")
+            presenter!!.onButtonClick(from = "search")
         })
 
         this.BackButton!!.setOnClickListener(View.OnClickListener {
