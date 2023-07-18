@@ -42,8 +42,6 @@ class Forecast : AppCompatActivity(), Contract.View{
         button = findViewById<Button>(R.id.buttonn)
         presenter = presenter(this, Model())
 
-
-
         //Assigning listeners to buttons
         this.button!!.setOnClickListener(View.OnClickListener {
             presenter!!.onButtonClick(from = "forecast")
@@ -56,43 +54,40 @@ class Forecast : AppCompatActivity(), Contract.View{
     }
 
     override fun getdata(): List<Any> {
-
-        progressbar!!.visibility = View.VISIBLE
-        dips!!.visibility = View.INVISIBLE
-
+        showProgressBar()
         val location = location!!.text.toString()
-        val test = location!!::toString
-        Log.d("test", test.toString())
         val days = 1
         return listOf(location, days)
     }
 
     override fun display(display: List<Any>?) {
 
-        val to_display:String
-        val icon_url:String
+        var to_display:String = "No Data\nNo Data, No Data"
+        var icon_url:String = ""
 
-        when (display){
-            null -> {
-                to_display = "No Data\nNo Data, No Data"
-                icon_url = ""
-            }
-            else -> {
-                to_display = "${display[2]}\n${display[0]},${display[1]}"
-                icon_url = "https:${display[3]}"
-            }
+        if(display!=null){
+            to_display = "${display[2]}\n${display[0]},${display[1]}"
+            icon_url = "https:${display[3]}"
         }
 
         dips!!.text = to_display
-
         forecast_icon!!.load(icon_url){
             crossfade(true)
             error(R.drawable.sunny_icon)
-            placeholder(R.drawable.image_temp)
+            placeholder(R.drawable.progressbar)
             transformations(CircleCropTransformation())
         }
+
+        showData()
+    }
+
+    fun showProgressBar(){
         progressbar!!.visibility = View.INVISIBLE
         dips!!.visibility = View.VISIBLE
     }
 
+    fun showData(){
+        progressbar!!.visibility = View.INVISIBLE
+        dips!!.visibility = View.VISIBLE
+    }
 }

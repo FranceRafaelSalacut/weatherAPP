@@ -25,7 +25,7 @@ class Model :  Contract.Model{
         instance?.load(icon_url){
             crossfade(true)
             error(R.drawable.sunny_icon)
-            placeholder(R.drawable.image_temp)
+            placeholder(R.drawable.progressbar)
             transformations(CircleCropTransformation())
         }
     }

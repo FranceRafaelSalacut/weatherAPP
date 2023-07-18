@@ -60,31 +60,23 @@ class Searchbars: AppCompatActivity(), Contract.View{
     }
 
     override fun display(display: List<Any>?) {
-        when(display){
-            null -> {
-                showNoData()
-            }
-            else -> {
-                val display = display as List<String>
-                if(display.size > 0){
-                    val adapter = CustomAdapter(display,  Model())
-                    location_result!!.swapAdapter(adapter, false)
-                    location_result!!.layoutManager = LinearLayoutManager(this)
 
-                    adapter.setOnClickListener(object : CustomAdapter.OnClickListener{
-                        override fun onClick(location: String) {
-                            val intent = Intent(this@Searchbars, dummclass::class.java)
-                            intent.putExtra("Location", location)
-                            startActivity(intent)
-                        }
-                    })
+        showNoData()
 
-                    showData()
-                }else{
-                    showNoData()
-                    //asdhasdjahsidhasd
+        if(display!=null && display.size>0) {
+            val display = display as List<String>
+            val adapter = CustomAdapter(display, Model())
+            location_result!!.swapAdapter(adapter, false)
+            location_result!!.layoutManager = LinearLayoutManager(this)
+
+            adapter.setOnClickListener(object : CustomAdapter.OnClickListener {
+                override fun onClick(location: String) {
+                    val intent = Intent(this@Searchbars, dummclass::class.java)
+                    intent.putExtra("Location", location)
+                    startActivity(intent)
                 }
-            }
+            })
+            showData()
         }
 
     }
