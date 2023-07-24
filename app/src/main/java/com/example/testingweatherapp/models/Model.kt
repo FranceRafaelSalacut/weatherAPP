@@ -40,11 +40,13 @@ class Model :  Contract.Model{
                 if (response.isSuccessful) {
                     listener?.onFinished(response.body())
                     if(instance!=null) setIcon(response.body() as Current.forecastData?, instance)
+                    result.cancel()
 
                 } else {
                     Log.d("this", "AINT ASUCCSFSDFSEFA")
                     listener?.onFinished(null)
                     setIcon(null, instance)
+                    result.cancel()
                 }
             }
 
@@ -52,6 +54,7 @@ class Model :  Contract.Model{
                 Log.d("this", "FAILURE!! ")
                 listener?.onFinished(null)
                 setIcon(null, instance)
+                result.cancel()
             }
         })
     }

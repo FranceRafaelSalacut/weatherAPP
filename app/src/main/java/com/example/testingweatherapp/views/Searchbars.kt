@@ -2,6 +2,8 @@ package com.example.testingweatherapp.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
@@ -40,10 +42,25 @@ class Searchbars: AppCompatActivity(), Contract.View{
         progressbar = findViewById<ProgressBar>(R.id.progressBar)
         no_data = findViewById<TextView>(R.id.no_data)
 
-        this.SearchButton!!.setOnClickListener(View.OnClickListener {
+        /*this.SearchButton!!.setOnClickListener(View.OnClickListener {
             Log.d("this", "looking for some places?")
             presenter!!.onButtonClick(from = "search")
+        })*/
+        this.search_data!!.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                Log.d("list", "after")
+                presenter!!.onButtonClick(from="search")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Log.d("list", "on")
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                Log.d("list", "before")
+            }
         })
+
 
         this.BackButton!!.setOnClickListener(View.OnClickListener {
             Log.d("this", "Going back downtown")
